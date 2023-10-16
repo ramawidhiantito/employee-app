@@ -1,0 +1,158 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/employees/": {
+            "get": {
+                "description": "Get a list of all employees",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get a list of employees",
+                "operationId": "get-employees",
+                "responses": {
+                    "200": {
+                        "description": "Successful response with a list of Employees",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Employee"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new employee",
+                "consumes": [
+                    "application/json"
+                ],
+                "summary": "Create a new employee",
+                "operationId": "create-employee",
+                "parameters": [
+                    {
+                        "description": "Employee object",
+                        "name": "employee",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Employee"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful response with a created Employee",
+                        "schema": {
+                            "$ref": "#/definitions/models.Employee"
+                        }
+                    }
+                }
+            }
+        },
+        "/employees/{id}": {
+            "get": {
+                "description": "Get an employee by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get an employee by ID",
+                "operationId": "get-employee",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Employee ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response with an Employee",
+                        "schema": {
+                            "$ref": "#/definitions/models.Employee"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update an employee by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "summary": "Update an employee by ID",
+                "operationId": "update-employee",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Employee ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Employee object",
+                        "name": "employee",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Employee"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response with an updated Employee",
+                        "schema": {
+                            "$ref": "#/definitions/models.Employee"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete an employee by ID",
+                "summary": "Delete an employee by ID",
+                "operationId": "delete-employee",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Employee ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content\" \"Successful response with no content"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Employee": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "hire_date": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "last_name": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
