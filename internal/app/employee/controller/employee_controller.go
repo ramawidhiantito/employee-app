@@ -68,6 +68,11 @@ func (ec *EmployeeController) GetEmployee(c *gin.Context) {
 func (ec *EmployeeController) CreateEmployee(c *gin.Context) {
 	var employee models.Employee
 
+	if err := c.ShouldBindJSON(&employee); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input data"})
+		return
+	}
+
 	if err := ec.useCase.CreateEmployee(&employee); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create employee"})
 		return
